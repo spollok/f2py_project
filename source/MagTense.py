@@ -144,7 +144,7 @@ class Tile():
                         u_oa2_x=self.u_oa2[0], u_oa2_y=self.u_oa2[1], u_oa2_z=self.u_oa2[2], \
                         M_rem=self.M_rem, mu_r_ea=self.mu_r_ea, mu_r_oa=self.mu_r_oa, \
                         tile_type=self.tile_type, magentic_type=self.magentic_type, stfcn_index=self.stfcn_index, incl_it=self.incl_it, \
-                        pos0=self.offset[0], pos1=self.offset[1], pos2=self.offset[2], rot0=self.rot[0], rot1=self.rot[1], rot2=self.rot[2], \
+                        offset0=self.offset[0], offset1=self.offset[1], offset2=self.offset[2], rot0=self.rot[0], rot1=self.rot[1], rot2=self.rot[2], \
                         use_sym=self.use_sym, sym_op0=self.sym_op[0], sym_op1=self.sym_op[1], sym_op2=self.sym_op[2], \
                         color0=self.color[0], color1=self.color[1], color2=self.color[2], M_rel=self.M_rel)
                 return txt
@@ -246,7 +246,8 @@ class MagneticFieldIntensity():
                 with open(os.path.join(DIRPATH_MAGTENSE, FILENAME_OUTPUT_FIELD), "r") as file:
                         for i, line in enumerate(file.readlines()):
                                 values = line.strip().split(",")
-                                self.field[points[i]] = np.array([float(values[0]), float(values[1]), float(values[2])])
+                                point_hash = (points[i][0], points[i][1], points[i][2])
+                                self.field[point_hash] = np.array([float(values[0]), float(values[1]), float(values[2])])
                                 
 
 def create_points_txt(points):

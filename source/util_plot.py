@@ -15,7 +15,7 @@ def plot_cube(axes, cube):
     # Rotation about x-axis: [[1, 0, 0], [0, cos(rot_x), -sin(rot_x)], [0, sin(rot_x), cos(rot_x)]]
     # Rotation about y-axis: [[cos(rot_y), 0, sin(rot_y)], [0, 1, 0], [-sin(rot_y), 0, cos(rot_y)]]
     # Rotation about z-axis: [[cos(rot_z), -sin(rot_z), 0], [sin(rot_z), cos(rot_z), 0], [0, 0, 1]]
-    ver = ver * cube.get_size() + cube.get_pos()
+    ver = ver * cube.get_size() + cube.get_offset()
     # Define the faces of the unit cubic
     fac = np.array([[0, 1, 2, 3], [3, 2, 4, 5], [5, 6, 7, 4],
                     [0, 1, 7, 6], [5, 6, 0, 3], [1, 2, 4, 7]])
@@ -39,7 +39,7 @@ def plot_field(axes, magneticfield):
     else:
         len_arrow = 0.075
     for point, field_vector in magneticfield.field.items():
-        ax.quiver(point.x, point.y, point.z, field_vector[0], field_vector[1], field_vector[2],
+        ax.quiver(point[0], point[1], point[2], field_vector[0], field_vector[1], field_vector[2],
                   colors=cmap(norm(np.linalg.norm(field_vector))), pivot='middle', length=len_arrow, normalize=True)
     plt.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax)
 
